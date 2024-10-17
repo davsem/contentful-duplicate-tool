@@ -60,6 +60,7 @@ contentful-duplicate  [--version] [--help]
 | --suffix                 |String to suffix to titles of all entries when duplicating to target.|
 | --regex-pattern          |Regex pattern to search in titles of entries when duplicating to target. This flag input is required if --replace-str is provided.|
 | --replace-str            |String to replace the regex pattern with in titles of entries when duplicating to target. This flag input is required if --regex-pattern is provided.|
+| --field                  |Title field that will be updated. Defaults to 'name'.|
 | --publish                |The only valid option is false. If set to false, the states of the duplicated entries in target will be draft. If not provided, the states of the duplicated entries in target will be the same as source.|
 | --single-level        |Default value is false. If set to true, only the first level entries will be duplicated to target. Child entries won't be duplicated.|
 

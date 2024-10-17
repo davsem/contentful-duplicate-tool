@@ -43,7 +43,7 @@ const iterateCreateEntryContentTypes = async (entryId, env, excludeEntryIds) => 
 };
 
 const duplicateEntries = async (
-  entries, sourceEnv, publish, exclude, singleLevel, targetEnv, prefix, suffix, regex, replaceStr,
+  entries, sourceEnv, publish, exclude, singleLevel, targetEnv, prefix, suffix, regex, replaceStr, fieldName,
 ) => {
   // check if the target environment has enough needed content types or not
   /* eslint-disable no-await-in-loop */
@@ -68,9 +68,9 @@ const duplicateEntries = async (
 
     entries.forEach((entryId) => {
       duplicateEntry(entryId, sourceEnv, publish, exclude, singleLevel, targetEnv,
-        prefix, suffix, regex, replaceStr, targetContentTypes).then((entry) => {
-        const entryNameObj = entry.fields.name;
-        const firstKeyName = Object.keys(entry.fields.name)[0];
+        prefix, suffix, regex, replaceStr, targetContentTypes, fieldName).then((entry) => {
+        const entryNameObj = entry.fields[fieldName];
+        const firstKeyName = Object.keys(entry.fields[fieldName])[0];
 
         spinner.info(`Duplicate entry ${entryId} successfully. New entry #${entry.sys.id} - ${entryNameObj[firstKeyName]}`);
       });
@@ -87,6 +87,7 @@ module.exports = async (args) => {
   const entries = args.entries.split(',');
   const exclude = args.exclude.split(',');
   const environment = args.environment || 'master';
+  const fieldName = args.field;
   const targetEnvironment = args['target-environment'] || environment;
 
   spinner.start();
@@ -123,7 +124,7 @@ module.exports = async (args) => {
   }
 
   await duplicateEntries(
-    entries, sourceEnv, args.publish, exclude, args['single-level'], targetEnv, args.prefix, args.suffix, regex, args['replace-str'],
+    entries, sourceEnv, args.publish, exclude, args['single-level'], targetEnv, args.prefix, args.suffix, regex, args['replace-str'], fieldName,
   );
 
   spinner.stop();

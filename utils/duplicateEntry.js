@@ -20,7 +20,7 @@ const error = require('./error');
  */
 const duplicateEntry = async (
   entryId, environment, publish, exclude, isSingleLevel, targetEnvironment,
-  prefix, suffix, regex, replaceStr, targetContentTypes) => {
+  prefix, suffix, regex, replaceStr, targetContentTypes, fieldName) => {
   const spinner = ora().start();
 
   if (!exclude.includes(entryId)) {
@@ -35,7 +35,7 @@ const duplicateEntry = async (
     /* eslint-disable no-await-in-loop */
     for (const field of Object.keys(newEntryFields)) {
       // apply the new name for the new entry (if needed)
-      if (field === constants.FIELD_NAME) {
+      if (field === fieldName) {
         for (const localeKey of Object.keys(newEntryFields[field])) {
           let createdName = newEntryFields[field][localeKey];
 

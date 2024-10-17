@@ -12,6 +12,7 @@ const menus = {
                               [--exclude <excludeEntryIds,...>]
                               [--prefix <prefixString>] [--suffix <suffixString>]
                               [<--regex-pattern> <regexPattern> <--replace-str> <replaceString>]
+                              [--field <fieldString>]
                               [--publish <false>]
                               [--single-level <true|false>]
 
@@ -44,10 +45,12 @@ const menus = {
   --replace-str             String to replace the regex pattern with in titles of entries when
                             duplicating to target. This flag input is required if --regex-pattern is
                             provided.
+  --field                   Name of the title field that will be updated by replace-str, suffix, or 
+                            prefix options. Defaults to name.
   --publish                 The only valid option is false. If set to false, the states of the duplicated
                             entries in target will be draft. If not provided, the states of the
                             duplicated entries in target will be the same as source.
-  --single-level         Default value is false. If set to true, only the first level entries will
+  --single-level            Default value is false. If set to true, only the first level entries will
                             be duplicated to target. Child entries won't be duplicated.
   `,
 };

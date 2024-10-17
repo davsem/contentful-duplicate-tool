@@ -19,6 +19,7 @@ module.exports = () => {
       'target-space-id': '',
       suffix: '',
       prefix: '',
+      field: 'name',
     },
   });
 
