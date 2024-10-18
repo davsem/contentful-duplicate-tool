@@ -86,3 +86,11 @@ https://monosnap.com/file/pi0zH97fmNpEOlRoHm16KJuRCzWvX6
 
 6. Duplicate exclude entry
 https://monosnap.com/file/MNBS3UckD10PDno8j1l7sVP0LuSFCT
+
+## Useful use cases
+
+Duplicating content and updating the title of a field called "instanceName".
+
+```
+./bin/contentful-duplicate --space-id <space_id> --mToken <access_token> --environment master --regex-pattern 'Creative\sB2B' --replace-str 'CLONED' --publish false --entries 2HmWTdPAWvyGmbvTM77mTW  --field instanceName --suffix ' [CLONED]'
+```

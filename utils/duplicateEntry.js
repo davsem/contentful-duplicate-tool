@@ -63,14 +63,25 @@ const duplicateEntry = async (
                 spinner.info(`Duplicating sub entry #${content.sys.id}`);
 
                 const duplicatedEntry = await duplicateEntry(
-                  content.sys.id, environment, publish, exclude, isSingleLevel, targetEnvironment,
-                  prefix, suffix, regex, replaceStr, targetContentTypes,
+                  content.sys.id, environment, publish, exclude, isSingleLevel,
+                  targetEnvironment, prefix, suffix, regex, replaceStr, targetContentTypes, fieldName,
                 );
                 fieldContentValue[contentIndex].sys.id = duplicatedEntry.sys.id;
               }
             }
-          }
+          } else if (typeof fieldContentValue === 'object' && fieldContentValue !== null) {
+            if (fieldContentValue.sys.type === constants.LINK_TYPE
+              && fieldContentValue.sys.linkType === constants.ENTRY_TYPE
+              && !exclude.includes(fieldContentValue.sys.id)) {
+              spinner.info(`Duplicating sub entry #${fieldContentValue.sys.id}`);
 
+              const duplicatedEntry = await duplicateEntry(
+                fieldContentValue.sys.id, environment, publish, exclude, isSingleLevel,
+                targetEnvironment, prefix, suffix, regex, replaceStr, targetContentTypes, fieldName,
+              );
+              fieldContentValue.sys.id = duplicatedEntry.sys.id;
+            }
+          }
           newEntryFields[field][fieldContentKey] = fieldContentValue;
         }
       }
