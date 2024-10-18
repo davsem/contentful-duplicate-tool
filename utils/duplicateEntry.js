@@ -63,8 +63,8 @@ const duplicateEntry = async (
                 spinner.info(`Duplicating sub entry #${content.sys.id}`);
 
                 const duplicatedEntry = await duplicateEntry(
-                  content.sys.id, environment, publish, exclude, isSingleLevel,
-                  targetEnvironment, prefix, suffix, regex, replaceStr, targetContentTypes, fieldName,
+                  content.sys.id, environment, publish, exclude, isSingleLevel, targetEnvironment,
+                  prefix, suffix, regex, replaceStr, targetContentTypes, fieldName,
                 );
                 fieldContentValue[contentIndex].sys.id = duplicatedEntry.sys.id;
               }
